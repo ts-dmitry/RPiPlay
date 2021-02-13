@@ -73,7 +73,7 @@ audio_renderer_t *audio_renderer_gstreamer_init(logger_t *logger, video_renderer
     assert(check_plugins());
 
     renderer->pipeline = gst_parse_launch("appsrc name=audio_source stream-type=0 format=GST_FORMAT_TIME is-live=true ! queue ! decodebin !"
-    "audioconvert ! volume name=volume ! level ! autoaudiosink sync=false", &error);
+    "audioconvert ! volume name=volume ! level ! alsasink sync=false", &error);
     g_assert(renderer->pipeline);
 
     renderer->appsrc = gst_bin_get_by_name(GST_BIN(renderer->pipeline), "audio_source");
